@@ -1,0 +1,1 @@
+This repo is codes for Google Universal Image Embedding competition on kaggle <https://www.kaggle.com/competitions/google-universal-image-embedding/code?competitionId=36414&sortBy=dateRun&tab=profile>. 
