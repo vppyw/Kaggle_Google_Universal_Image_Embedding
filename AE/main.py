@@ -37,27 +37,27 @@ def main():
         'batch_size': 64,
         'learning_rate': 1e-4,
         'weight_decay': 1e-4,
-        'number_epoch': 50,
+        'number_epoch': 25,
         'device': 'cuda' if torch.cuda.is_available() else 'cpu',
+        'data_dir': '../data',
         'log_dir': './gen_log',
     }
 
     tfm = transforms.Compose([
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(degrees=10),
+            transforms.AutoAugment(),
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                     std=[0.229, 0.224, 0.225]),
         ])    
 
-    dataset = datasets.CIFAR10(root='./data',
+    dataset = datasets.CIFAR10(root=config['data_dir'],
                                 train=True,
                                 download=True,
                                 transform=tfm)
     
-    testset = datasets.CIFAR10(root='./data',
-                                train= False,
+    testset = datasets.CIFAR10(root=config['data_dir'],
+                                train=False,
                                 download=True,
                                 transform=None)
 
@@ -92,7 +92,7 @@ def main():
 
         encoder.train()
         decoder.train()
-        for imgs, _ in tqdm(trainloader):
+        for imgs, _ in tqdm(trainloader, ncols=50):
             imgs = imgs.to(config['device'])
             gen_imgs = decoder(encoder(imgs, norm=False))
             loss = criterion(gen_imgs, imgs)
@@ -105,7 +105,7 @@ def main():
         decoder.eval()
 
         log = False
-        for imgs, _ in tqdm(validloader):
+        for imgs, _ in tqdm(validloader, ncols=50):
             imgs = imgs.to(config['device'])
             gen_imgs = decoder(encoder(imgs, norm=False))
             loss = criterion(gen_imgs, imgs)
