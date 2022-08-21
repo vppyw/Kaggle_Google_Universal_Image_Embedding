@@ -7,3 +7,5 @@
 [Sampling Matters in Deep Embedding Learning](https://arxiv.org/pdf/1706.07567.pdf)
 
 [Unifying Specialist Image Embedding into Universal Image Embedding](https://arxiv.org/pdf/2003.03701.pdf)
+
+[AUGMIX: A SIMPLE DATA PROCESSING METHOD TO IMPROVE ROBUSTNESS AND UNCERTAINTY](https://arxiv.org/pdf/1912.02781.pdf)
